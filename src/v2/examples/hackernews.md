@@ -1,5 +1,5 @@
 ---
-title: HackerNews Clone
+title: Bản sao của HackerNews
 type: examples
 order: 12
 ---
