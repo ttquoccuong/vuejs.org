@@ -4,7 +4,7 @@ type: guide
 order: 503
 ---
 
-## The Complete SSR Guide
+## Hướng dẫn SSR hoàn chỉnh
 
 We have created a standalone guide for creating server-rendered Vue applications. This is a very in-depth guide for those who are already familiar with client-side Vue development, server-side Node.js development and webpack. Check it out at [ssr.vuejs.org](https://ssr.vuejs.org/).
 
