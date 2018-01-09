@@ -4,7 +4,7 @@ type: examples
 order: 12
 ---
 
-> This is a HackerNews clone built upon HN's official Firebase API, Vue 2.0 + Vue Router + Vuex, with server-side rendering.
+> Đây là một bản sao của HackerNews được xây dựng dựa trên API từ Firebase, Vue 2.0 + Vue Router + Vuex, với server-side rendering.
 
 {% raw %}
 <div style="max-width: 600px;">
@@ -14,22 +14,22 @@ order: 12
 </div>
 {% endraw %}
 
-> [Live Demo](https://vue-hn.now.sh/)
-> Note: the demo may need some spin up time if nobody has accessed it for a certain period.
+> [Xem Demo](https://vue-hn.now.sh/)
+> Lưu ý: Bản demo này có thể cần một ít thời gian để tải nếu không có ai truy cập nó trong một khoảng thời gian nhất định.
 >
-> [[Source](https://github.com/vuejs/vue-hackernews-2.0)]
+> [[Mã nguồn](https://github.com/vuejs/vue-hackernews-2.0)]
 
-## Features
+## Tính năng
 
 - Server Side Rendering
-  - Vue + Vue Router + Vuex working together
-  - Server-side data pre-fetching
+  - Vue + Vue Router + Vuex làm việc cùng nhau
+  - Lấy dữ liệu từ Server-side trước khi hiển thị
   - Client-side state & DOM hydration
 - Single-file Vue Components
-  - Hot-reload in development
+  - Hot-reload trong môi trường phát triển
   - CSS extraction for production
-- Real-time List Updates with FLIP Animation
+- Cập nhật danh sách tin trong thời gian thật với hiệu ứng lật (FLIP)
 
-## Architecture Overview
+## Cấu trúc tổng quan
 
 <img width="973" alt="Hackernew clone architecture overview" src="/images/hn-architecture.png">
