@@ -6,8 +6,8 @@ order: 503
 
 ## Hướng dẫn SSR hoàn chỉnh
 
-We have created a standalone guide for creating server-rendered Vue applications. This is a very in-depth guide for those who are already familiar with client-side Vue development, server-side Node.js development and webpack. Check it out at [ssr.vuejs.org](https://ssr.vuejs.org/).
+Chúng tôi đã tạo hướng dẫn riêng biệt cho việc tạo một ứng dụng Vue với server-rendered. Đây là hướng dẫn cụ thể để phát triển client-side với Vue, server-side với Node.js và webpack. Xem chi tiết tại [ssr.vuejs.org](https://ssr.vuejs.org/).
 
 ## Nuxt.js
 
-Properly configuring all the discussed aspects of a production-ready server-rendered app can be a daunting task. Luckily, there is an excellent community project that aims to make all of this easier: [Nuxt.js](https://nuxtjs.org/). Nuxt.js is a higher-level framework built on top of the Vue ecosystem which provides an extremely streamlined development experience for writing universal Vue applications. Better yet, you can even use it as a static site generator (with pages authored as single-file Vue components)! We highly recommend giving it a try.
+Việc tự cấu hình một ứng dụng server-rendered cho sản phẩm thật sự có thể là một công việc khó khăn. May thay, có một dự án mã nguồn mở làm cho công việc này dễ dàng hơn rất nhiều đó là: [Nuxt.js](https://nuxtjs.org/). Nuxt.js là một higher-level framework được xây dựng bên trên hệ sinh thái Vue, nó cung cấp đầy đủ cho việc phát triển một ứng dụng hoàn thiện với Vue. Ngoài ra, bạn cũng có thể dùng nó như một trình thông dịch các trang tĩnh (static site generator) (với những trang giả định như single-file Vue components)! Chúng tôi nghĩ bạn nên thử nó.
