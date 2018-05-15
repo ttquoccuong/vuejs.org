@@ -293,11 +293,20 @@ Một lần nữa, nếu bạn đang dùng string template thì sẽ không tồ
 Tương tự như việc bind một thuộc tính thông thường vào một expression, chúng ta cũng có thể dùng `v-bind` để bind động props vào dữ liệu trên component cha. Bất cứ khi nào được cập nhật trong component cha, dữ liệu cũng sẽ được truyền xuống component con:
 
 ``` html
-<div>
+<div id="prop-example-2">
   <input v-model="parentMsg">
   <br>
   <child v-bind:my-message="parentMsg"></child>
 </div>
+```
+
+``` js
+new Vue({
+  el: '#prop-example-2',
+  data: {
+    parentMsg: 'Con ơi nhớ lấy câu này'
+  }
+})
 ```
 
 Bạn cũng có thể dùng cú pháp viết tắt của `v-bind`:
@@ -323,7 +332,7 @@ new Vue({
   components: {
     child: {
       props: ['myMessage'],
-      template: '<span>{{myMessage}}</span>'
+      template: '<span>{{ myMessage }}</span>'
     }
   }
 })
@@ -497,7 +506,7 @@ Như vậy ở đây có đến hai giá trị cho thuộc tính `class`:
 - `form-control`, gán trong template của component
 - `date-picker-theme-dark`, truyền vào component con từ đối tượng cha
 
-Đối với đa số các thuộc tính, giá trị truyền vào sẽ thay thế cho giá trị được gắn sẵn trong component, có nghĩa là truyền vào `type="large"` sẽ thay thế `type="date"` (và có thể là làm hỏng luôn chương trình!) May thay, các thuộc tính `class` và `style` thông minh hơn một chút vã sẽ sáp nhập (merge) các giá trị lại với nhau, tạo thành kết quả cuối cùng: `class="form-control date-picker-theme-dark"`.
+Đối với đa số các thuộc tính, giá trị truyền vào sẽ thay thế cho giá trị được gắn sẵn trong component, có nghĩa là truyền vào `type="large"` sẽ thay thế `type="date"` (và có thể là làm hỏng luôn chương trình!) May thay, các thuộc tính `class` và `style` thông minh hơn một chút và sẽ sáp nhập (merge) các giá trị lại với nhau, tạo thành kết quả cuối cùng: `class="form-control date-picker-theme-dark"`.
 
 ## Các sự kiện tùy biến
 
@@ -508,7 +517,7 @@ Chúng ta đã biết rằng đối tượng cha có thể truyền dữ liệu 
 Mỗi đối tượng Vue đều phát triển một [giao diện sự kiện](../api/#Instance-Methods-Events), có nghĩa là nó có thể:
 
 - Lắng nghe một sự kiện với `$on(eventName)`
-- Kích hoạt một sự kiện với `$emit(eventName)`
+- Kích hoạt một sự kiện với `$emit(eventName, optionalPayload)`
 
 <p class="tip">Lưu ý rằng hệ thống sự kiện của Vue khác với [EventTarget API](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) của trình duyệt. Tuy cách hoạt động có vẻ giống nhau, `$on` và `$emit` __không phải__ là alias của `addEventListener` và `dispatchEvent`.</p>
 
@@ -592,6 +601,84 @@ new Vue({
 
 Trong ví dụ này, cần lưu ý rằng đối tượng con hoàn toàn không bị ràng buộc gì với thế giới bên ngoài. Nó chỉ làm đúng một việc là thông báo thông tin về hoạt động của chính mình – lắng nghe và xử lí thế nào hoàn toàn là việc của component cha.
 
+Đây là một ví dụ về cách dùng dữ liệu payload:
+
+``` html
+<div id="message-event-example" class="demo">
+  <p v-for="msg in messages">{{ msg }}</p>
+  <button-message v-on:message="handleMessage"></button-message>
+</div>
+```
+
+``` js
+Vue.component('button-message', {
+  template: `<div>
+    <input type="text" v-model="message" />
+    <button v-on:click="handleSendMessage">Gửi</button>
+  </div>`,
+  data: function () {
+    return {
+      message: 'Thông điệp'
+    }
+  },
+  methods: {
+    handleSendMessage: function () {
+      this.$emit('message', { message: this.message })
+    }
+  }
+})
+
+new Vue({
+  el: '#message-event-example',
+  data: {
+    messages: []
+  },
+  methods: {
+    handleMessage: function (payload) {
+      this.messages.push(payload.message)
+    }
+  }
+})
+```
+
+{% raw %}
+<div id="message-event-example" class="demo">
+  <p v-for="msg in messages">{{ msg }}</p>
+  <button-message v-on:message="handleMessage"></button-message>
+</div>
+<script>
+Vue.component('button-message', {
+  template: `<div>
+    <input type="text" v-model="message" />
+    <button v-on:click="handleSendMessage">Gửi</button>
+  </div>`,
+  data: function () {
+    return {
+      message: 'Thông điệp'
+    }
+  },
+  methods: {
+    handleSendMessage: function () {
+      this.$emit('message', { message: this.message })
+    }
+  }
+})
+new Vue({
+  el: '#message-event-example',
+  data: {
+    messages: []
+  },
+  methods: {
+    handleMessage: function (payload) {
+      this.messages.push(payload.message)
+    }
+  }
+})
+</script>
+{% endraw %}
+
+Trong ví dụ thứ hai này, lưu ý rằng component con vẫn hoàn toàn được tách rời khỏi những gì xảy ra bên ngoài nó. Tất cả những gì nó làm là báo cáo thông tin về mình, bao gồm dữ liệu payload, cho bộ phát sự kiện (event emitter), phòng khi có một component cha cần đến. 
+
 ### Bind sự kiện native vào component
 
 Đôi khi bạn cũng muốn lắng nghe một sự kiện native trên phần tử root của component. Trong những trường hợp này, bạn có thể sử dụng modifier `.native` cho `v-on`. Ví dụ:
@@ -628,6 +715,14 @@ sẽ được mở rộng ra thành:
 this.foo = 'baz' // cách làm sai, và Vue sẽ cảnh báo
 this.$emit('update:foo', newValue) // OK
 ```
+
+Modifier `.sync` cũng có thể được dùng với `v-bind` khi sử dụng một đối tượng để set nhiều thuộc tính cùng một lúc:
+
+```html
+<comp v-bind.sync="{ foo: 1, bar: 2 }"></comp>
+```
+
+Ví dụ trên thêm hàm lắng nghe sự kiện cập nhật `v-on` cho cả `foo` và `bar`.
 
 ### Sử dụng sự kiện tùy biến với form input component
 
@@ -1357,13 +1452,13 @@ Trở lại ví dụ của chúng ta, hãy tạo điểm quyết định đó tr
 
 ``` js
 beforeCreate: function () {
-  this.$options.components.TreeFolderContents = require('./tree-folder-contents.vue')
+  this.$options.components.TreeFolderContents = require('./tree-folder-contents.vue').default
 }
 ```
 
 Thế là vấn đề đã được giải quyết!
 
-### Inline Template
+### Inline template
 
 Khi ta đặt thuộc tính đặc biệt `inline-template` vào một component con, component này sẽ dùng nội dung của nó làm template thay vì coi là nội dung được phân phối. Điều này giúp cho việc biên soạn template được linh hoạt hơn.
 

@@ -8,7 +8,7 @@ order: 2
 
 Gọi tắt là Vue (phát âm là /vjuː/, giống như **view** trong tiếng Anh), Vue.js là một **framework linh động** (nguyên bản tiếng Anh: progressive – tiệm tiến) dùng để xây dựng giao diện người dùng (user interfaces). Khác với các framework nguyên khối (monolithic), Vue được thiết kế từ đầu theo hướng cho phép và khuyến khích việc phát triển ứng dụng theo từng bước. Khi phát triển lớp giao diện (view layer), người dùng chỉ cần dùng thư viện lõi (core library) của Vue, vốn rất dễ học và tích hợp với các thư viện hoặc dự án có sẵn. Cùng lúc đó, nếu kết hợp với những kĩ thuật hiện đại như [SFC (single file components)](single-file-components.html) và [các thư viện hỗ trợ](https://github.com/vuejs/awesome-vue#components--libraries), Vue cũng đáp ứng được dễ dàng nhu cầu xây dựng những ứng dụng một trang (SPA - Single-Page Applications) với độ phức tạp cao hơn nhiều.
 
-Nếu bạn muốn tìm hiểu thêm về Vue, chúng tôi đã <a id="modal-player" href="javascript:;">tạo một video clip</a> về những nguyên tắc cốt lõi và một dự án mẫu.
+Nếu bạn muốn tìm hiểu thêm về Vue, chúng tôi đã <a id="modal-player" href="#">tạo một video clip</a> về những nguyên tắc cốt lõi và một dự án mẫu.
 
 Nếu bạn là một lập trình viên front-end giàu kinh nghiệm và muốn hiểu hơn về tương quan giữa Vue và các thư viện hay framework khác, hãy xem phần [So sánh với các framework khác](comparison.html).
 
@@ -19,6 +19,14 @@ Nếu bạn là một lập trình viên front-end giàu kinh nghiệm và muố
 Để dùng thử Vue.js, không gì dễ hơn là bắt đầu với một [ví dụ Hello World trên JSFiddle](https://jsfiddle.net/vuejs/bc5rzva3/). Hãy mở ví dụ này trong một tab khác và làm theo những ví dụ cơ bản mà chúng tôi sẽ nhắc đến dần sau đây. Bạn cũng có thể <a href="https://gist.githubusercontent.com/chrisvfritz/7f8d7d63000b48493c336e48b3db3e52/raw/ed60c4e5d5c6fec48b0921edaed0cb60be30e87c/index.html" target="_blank" download="index.html">tạo một file <code>index.html</code></a> và nhúng thư viện Vue vào:
 
 ``` html
+<!-- bản phát triển (development), bao gồm những cảnh báo hữu ích trong console -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+```
+
+hoặc:
+
+``` html
+<!-- bản production, được tối ưu về dung lượng và tốc độ -->
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 ```
 
@@ -229,7 +237,6 @@ Vue cũng cung cấp directive `v-model` giúp cho việc ràng buộc hai chi�
 <div id="app-6">
   <p>{{ message }}</p>
   <input v-model="message">
-  <button v-on:click="changeMessage">Thay đổi thông điệp</button>
 </div>
 ```
 ``` js
